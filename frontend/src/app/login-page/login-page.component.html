@@ -1,0 +1,63 @@
+
+   <div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2>User Portal</h2>
+  
+      <input type="text" formControlName="name" placeholder="Enter User Name" />
+      <div class="error" *ngIf="loginForm.get('name')?.touched && loginForm.get('name')?.invalid">
+        <small *ngIf="loginForm.get('name')?.errors?.['required']">Name is required.</small>
+      </div>
+  
+      <input type="email" formControlName="email" placeholder="Enter User Email" />
+      <div class="error" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+        <small *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</small>
+        <small *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email.</small>
+      </div>
+  
+      <input type="password" formControlName="password" placeholder="Enter Password" />
+      <div class="error" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+        <small *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</small>
+        <small *ngIf="loginForm.get('password')?.errors?.['minlength']">Minimum 6 characters required.</small>
+      </div>
+  
+      <div class="button-group">
+        <button type="submit" [disabled]="loginForm.invalid">Register</button>
+        <button type="button" (click)="navigateToProducts()">Login</button>
+      </div>
+    </form>
+  
+    
+    <div class="custom-alert" [class.show]="showAlert">
+      {{ alertMessage }}
+    </div>
+  
+   
+    <div class="table-container">
+      <h3>Registered Users</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Delete User</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of userList; track $index) {
+            <tr>
+              <td>{{ user.userId }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.password }}</td>
+              <td>
+    <button (click)="deleteUser(user.userId)">Delete</button>
+  </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

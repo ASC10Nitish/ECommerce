@@ -1,0 +1,72 @@
+
+
+    <div class="product-page-container">
+        
+        <div class="product-form-card">
+          <h2><i class="fas fa-box-open"></i> Add Product</h2>
+          <form [formGroup]="productForm" (ngSubmit)="AddProduct()">
+            <div class="form-group">
+              <label for="name">Product Name</label>
+              <input type="text" id="name" formControlName="name" placeholder="Enter Product Name" />
+              <div class="error" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+                <small *ngIf="productForm.get('name')?.errors?.['required']">Product name is required.</small>
+                <small *ngIf="productForm.get('name')?.errors?.['minlength']">Minimum 4 characters required.</small>
+                <small *ngIf="productForm.get('name')?.errors?.['maxlength']">Maximum 10 characters allowed.</small>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <label for="category">Category</label>
+              <input type="text" id="category" formControlName="category" placeholder="Enter Product Category" />
+              <div class="error" *ngIf="productForm.get('category')?.touched && productForm.get('category')?.invalid">
+                <small>Category is required.</small>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" id="description" formControlName="description" placeholder="Enter Description" />
+              <div class="error" *ngIf="productForm.get('description')?.touched && productForm.get('description')?.invalid">
+                <small>Description is required.</small>
+              </div>
+            </div>
+      
+            <div class="form-group">
+              <label for="price">Price (₹)</label>
+              <input type="number" id="price" formControlName="price" placeholder="Enter Price" />
+              <div class="error" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid">
+                <small *ngIf="productForm.get('price')?.errors?.['required']">Price is required.</small>
+                <small *ngIf="productForm.get('price')?.errors?.['min']">Price must be greater than 0.</small>
+              </div>
+            </div>
+      
+            <div class="form-actions">
+              <button type="submit" [disabled]="productForm.invalid">
+                <i class="fas fa-plus-circle"></i> Add Product
+              </button>
+            </div>
+          </form>
+        </div>
+      
+        <div class="custom-alert" [class.show]="showAlert">
+          {{ alertMessage }}
+        </div>
+      
+        
+        <div class="product-list">
+          <div class="product-card" *ngFor="let product of productList">
+            <h4>{{ product.name }}</h4>
+            <p><strong>Category:</strong> {{ product.category }}</p>
+            <p><strong>Description:</strong> {{ product.description }}</p>
+            <p><strong>Price:</strong> ₹{{ product.price }}</p>
+            <button (click)="addToCart(product)">Add to Cart</button>
+          </div>
+        </div>
+      
+        
+        <div class="view-cart-btn-container">
+          <button (click)="viewCart()">View Cart</button>
+          <button (click)="navigateToLogin()">Back to Login Page</button>
+        </div>
+      </div>
+      

@@ -1,0 +1,45 @@
+
+
+  <div class="cart-container">
+    <h2 class="cart-title">Your Shopping Cart</h2>
+  
+    <div *ngIf="cartItems.length > 0; else emptyCart">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of cartItems">
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price | currency }}</td>
+            <td>
+              <button class="remove-btn" (click)="removeFromCart(product.productId)">X</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="cart-actions">
+        <button class="place-order-btn" (click)="navigateToOrders()">Place Order</button>
+        <button class="back-btn" (click)="navigateToProducts()">Back to Products</button>
+      </div>
+    </div>
+
+    <div class="custom-alert" [class.show]="showAlert">
+      {{ alertMessage }}
+  </div>
+  
+    <ng-template #emptyCart>
+      <p class="empty-cart-message">🛒 Your cart is empty. Start shopping!</p>
+      <button class="back-btn" (click)="navigateToProducts()">Browse Products</button>
+    </ng-template>
+  </div>
+  
