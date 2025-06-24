@@ -1,0 +1,11 @@
+{
+  "name": "ECommerce Microservices Dev",
+  "image": "mcr.microsoft.com/devcontainers/java:17",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/maven:1": {}
+  },
+  "forwardPorts": [8080, 8081, 8082, 8083, 8084, 3306],
+  "postCreateCommand": "mvn --version && java -version",
+  "remoteUser": "vscode"
+}
