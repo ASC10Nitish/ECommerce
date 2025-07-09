@@ -10,4 +10,4 @@ COPY target/orders-0.0.1-SNAPSHOT.jar /app.jar
 COPY wait-for.sh /wait-for.sh
 RUN chmod +x /wait-for.sh
 
-ENTRYPOINT ["/wait-for.sh", "mysql-cart", "java", "-jar", "/app.jar"]
+ENTRYPOINT ["/wait-for.sh", "mysql-order", "java", "-jar", "/app.jar"]
