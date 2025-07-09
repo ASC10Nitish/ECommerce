@@ -10,4 +10,4 @@ COPY target/products-0.0.1-SNAPSHOT.jar /app.jar
 COPY wait-for.sh /wait-for.sh
 RUN chmod +x /wait-for.sh
 
-ENTRYPOINT ["/wait-for.sh", "mysql-products", "java", "-jar", "/app.jar"]
+ENTRYPOINT ["/wait-for.sh", "mysql-product", "java", "-jar", "/app.jar"]
