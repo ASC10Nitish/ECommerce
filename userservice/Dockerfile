@@ -5,7 +5,8 @@
 
 FROM openjdk:17-jdk-slim
 
-COPY target/users-0.0.1-SNAPSHOT.jar /app.jar
+# COPY target/users-0.0.1-SNAPSHOT.jar /app.jar
+COPY target/*.jar /app.jar
 COPY wait-for.sh /wait-for.sh
 RUN chmod +x /wait-for.sh
 
