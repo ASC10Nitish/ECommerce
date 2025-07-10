@@ -135,13 +135,14 @@ services:
       MYSQL_DATABASE: userlist
     ports:
       - "3307:3306"
+    networks:
+      - backend
+    command: --skip-symbolic-links --default-time-zone='+00:00'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - backend
 
   mysql-product:
     image: mysql:8
@@ -151,13 +152,14 @@ services:
       MYSQL_DATABASE: productlist
     ports:
       - "3308:3306"
+    networks:
+      - backend
+    command: --skip-symbolic-links --default-time-zone='+00:00'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - backend
 
   mysql-cart:
     image: mysql:8
@@ -167,13 +169,14 @@ services:
       MYSQL_DATABASE: cart_db
     ports:
       - "3309:3306"
+    networks:
+      - backend
+    command: --skip-symbolic-links --default-time-zone='+00:00'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - backend
 
   mysql-order:
     image: mysql:8
@@ -183,13 +186,14 @@ services:
       MYSQL_DATABASE: orders_db
     ports:
       - "3310:3306"
+    networks:
+      - backend
+    command: --skip-symbolic-links --default-time-zone='+00:00'
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
       retries: 5
-    networks:
-      - backend
 
   userservice:
     build: ./userservice
@@ -270,4 +274,3 @@ services:
 
 networks:
   backend:
-
